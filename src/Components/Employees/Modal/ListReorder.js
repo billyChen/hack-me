@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
 
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
@@ -8,10 +7,6 @@ import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-
-// Redcuers
-import { updateEmployee } from '../../../store/employee/reducers'
-
 
 const useStyles = makeStyles({
     root: {},
@@ -24,8 +19,6 @@ const useStyles = makeStyles({
 })
 
 const ListReorder = ({ list, handleReorderingDesks }) => {
-
-    const dispatch = useDispatch()
     const classes = useStyles()
 
     const reorder = (list, startIndex, endIndex) => {
@@ -41,7 +34,6 @@ const ListReorder = ({ list, handleReorderingDesks }) => {
         if (!result.destination) {
             return;
         }
-        console.log('RESULT', result)
 
         const items = reorder(
             list,
@@ -54,7 +46,6 @@ const ListReorder = ({ list, handleReorderingDesks }) => {
         //     items
         // });
     }
-    console.log('list', list)
     if (list.length === 0) return null
 
     return (

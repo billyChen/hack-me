@@ -10,14 +10,14 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogActions from '@material-ui/core/DialogActions'
 
 
-const Modal = ({ addNewDesk, handleModal, handleDeskIdField, openModal, handleUpdateDesk }) => {
+const Modal = ({ addNewDesk, handleModal, fields, handleDeskIdField, openModal, handleUpdateDesk }) => {
 
     return (
         <Dialog onClose={handleModal} open={openModal.open}>
             <DialogTitle id="">Desks</DialogTitle>
             <DialogContent>
                 <DialogContentText>{openModal.isUpdate ? 'Update' : 'Add'} a desk</DialogContentText>
-                {openModal.isUpdate && <TextField defaultValue={openModal.data.deskId} onBlur={handleDeskIdField} id="deskId" label="Desk ID" fullWidth autoFocus />}
+                {openModal.isUpdate && <TextField defaultValue={fields.deskId} onBlur={handleDeskIdField} id="deskId" label="Desk ID" fullWidth autoFocus />}
                 {!openModal.isUpdate && <TextField onBlur={handleDeskIdField} id="deskId" label="Desk ID" fullWidth autoFocus />}
             </DialogContent>
             <DialogActions>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // Selectors
@@ -76,7 +76,6 @@ const Employees = () => {
             isUpdate: true,
         })
 
-        console.log('VALUES', values)
         setListValues({
             ...values,
         })
@@ -109,7 +108,7 @@ const Employees = () => {
             name: null,
             list: [...desks]
         })
-    }, [openModal])
+    }, [desks, openModal])
 
     const handleEmployeeIdField = useCallback((e) => {
         if (!openModal.isUpdate)
@@ -123,10 +122,9 @@ const Employees = () => {
             })
 
         }
-    }, [openModal])
+    }, [listValues, openModal])
 
     const handleNameChange = useCallback((e) => {
-        console.log('List values', listValues)
         setListValues({
             ...listValues,
             name: e.target.value

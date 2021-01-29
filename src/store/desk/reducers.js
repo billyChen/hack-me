@@ -20,7 +20,7 @@ const deskSlice = createSlice({
             reducer(state, action) {
                 const { id, deskId } = action.payload
 
-                state.map((desk, idx) => {
+                state.forEach((desk, idx) => {
                     if (desk.id === id)
                         state[idx] = {
                             ...state[idx],

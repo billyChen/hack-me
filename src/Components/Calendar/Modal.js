@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogActions from '@material-ui/core/DialogActions'
 import TextField from '@material-ui/core/TextField'
@@ -40,8 +39,6 @@ const Modal = ({ desks,
     }
 
     const handleChangeMonth = (e) => {
-        console.log('MONTH', e.target.value)
-        console.log('NEW', [...Array(calendarData[parseInt(e.target.value)].numberDays).keys()])
         setValues({
             ...values,
             month: e.target.value
@@ -69,8 +66,6 @@ const Modal = ({ desks,
         setValues(DEFAULT_VALUES)
     }
 
-
-    console.log('CALENDAR', calendarData)
     return (
         <Dialog open={open} onClose={handleModalClose}>
             <DialogTitle>Assign a desk</DialogTitle>

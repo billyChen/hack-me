@@ -43,7 +43,6 @@ const useStyles = makeStyles(theme => ({
 const DEFAULT_OPENMODAL = {
     open: false,
     isUpdate: false,
-    data: null
 }
 
 const Desks = () => {
@@ -63,9 +62,10 @@ const Desks = () => {
         setOpenModal({
             open: true,
             isUpdate: true,
-            data: {
-                ...values
-            }
+        })
+
+        setFields({
+            ...values
         })
     }
 
@@ -104,12 +104,9 @@ const Desks = () => {
                 deskId: e.target.value
             })
         else
-            setOpenModal({
-                ...openModal,
-                data: {
-                    ...openModal.data,
-                    deskId: e.target.value
-                }
+            setFields({
+                ...fields,
+                deskId: e.target.value
             })
     }, [fields, openModal])
 
@@ -123,10 +120,9 @@ const Desks = () => {
     }, [dispatch])
 
     const handleUpdateDesk = useCallback(() => {
-        dispatch(updateDesk(openModal.data))
+        dispatch(updateDesk(fields))
         setOpenModal(DEFAULT_OPENMODAL)
-    }, [dispatch, openModal])
-
+    }, [dispatch, fields])
 
     return (<Box mt={3} className={classes.root} display="flex" flexDirection="column">
         <TableContainer component={Paper}>
@@ -144,6 +140,7 @@ const Desks = () => {
         </TableContainer>
 
         <Modal {...{
+            fields,
             handleDeskIdField,
             handleModal,
             openModal,

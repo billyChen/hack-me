@@ -1,6 +1,5 @@
 
 import { createSlice } from '@reduxjs/toolkit'
-import { uuid } from 'uuidv4'
 
 const calendarSlice = createSlice({
     name: 'calendar',
@@ -8,7 +7,6 @@ const calendarSlice = createSlice({
     reducers: {
         addNewAssignment: {
             reducer(state, action) {
-                const uniqId = uuid()
                 const { deskId, month, day, employeeId, color } = action.payload
                 state = {
                     ...state,
@@ -26,16 +24,19 @@ const calendarSlice = createSlice({
                 return state
             },
             prepare(params) {
-                console.log('PARAMS', params)
                 const { deskId, month, day, employeeId, color } = params
                 return { payload: { deskId, month, day, employeeId, color } }
             }
         },
         deleteAssignment: {
             reducer(state, action) {
-                return state.filter(desk => {
-                    return desk.id !== action.payload
-                })
+                const { month, day, deskId } = action.payload
+
+                delete state[month][day][deskId]
+            },
+            prepare(params) {
+                const { month, day, deskId } = params
+                return { payload: { month, day, deskId } }
             }
         },
     }

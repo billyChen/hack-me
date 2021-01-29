@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 // Material-i
 import Button from '@material-ui/core/Button'
@@ -11,10 +11,8 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { CallToAction } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 
 // Selectors
@@ -25,6 +23,9 @@ import { getCalendar } from '../../store/calendar/selectors'
 // Components
 import EmployeesList from './EmployeesList'
 import Modal from './Modal'
+
+// Reducers
+import { deleteAssignment } from '../../store/calendar/reducers'
 
 const CALENDAR_DATA = [
     {
@@ -78,7 +79,6 @@ const CALENDAR_DATA = [
 
 ]
 
-
 const useStyles = makeStyles({
     color: {
         width: '25px',
@@ -88,6 +88,7 @@ const useStyles = makeStyles({
 
 const Calendar = () => {
     const classes = useStyles()
+    const dispatch = useDispatch()
 
     //State
     const [page, setPage] = useState(0)
@@ -97,6 +98,11 @@ const Calendar = () => {
     const desks = useSelector(getDesks)
     const employees = useSelector(getEmployees)
     const calendar = useSelector(getCalendar)
+
+    const handleDeleteAssignment = (assignmentInfos, month, day, deskId) => {
+        if (assignmentInfos)
+            dispatch(deleteAssignment({ month, day, deskId }))
+    }
 
     const displayCalendarHead = () => {
         return [...Array(CALENDAR_DATA[page].numberDays).keys()].map((key, idx) => {
@@ -112,7 +118,7 @@ const Calendar = () => {
                 </TableCell>
                 {[...Array(CALENDAR_DATA[page].numberDays).keys()].map((key, idx) => {
                     const assignmentInfos = calendar[(page + 1).toString()]?.[(idx + 1).toString()]?.[desk.id]
-                    return <TableCell key={`body-${key}-${idx}`}>
+                    return <TableCell onClick={() => handleDeleteAssignment(assignmentInfos, page + 1, idx + 1, desk.id)} key={`body-${key}-${idx}`}>
                         {assignmentInfos && <div className={classes.color} style={{ backgroundColor: `#${assignmentInfos.color}` }}></div>}
                     </TableCell>
                 })}

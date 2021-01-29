@@ -113,15 +113,18 @@ const DrawerList = () => {
           {
             label: "Desks",
             route: "desks",
+            icon: <DesktopMacIcon />,
           },
-          { label: "Employees", route: "employees" },
-          { label: "Calendar", route: "calendar" },
+          {
+            label: "Employees",
+            route: "employees",
+            icon: <AccountCircleIcon />,
+          },
+          { label: "Calendar", route: "calendar", icon: <TodayIcon /> },
         ].map((link, index) => (
           <Link to={`${link.route}`}>
             <ListItem button key={`${link.label}-${index}`}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <DesktopMacIcon /> : <TodayIcon />}
-              </ListItemIcon>
+              <ListItemIcon>{link.icon}</ListItemIcon>
               <ListItemText primary={link.label} />
             </ListItem>
           </Link>

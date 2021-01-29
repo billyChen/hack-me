@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
 
 // Material-ui
 import TextField from '@material-ui/core/TextField'
@@ -29,8 +28,6 @@ const Modal = ({
             list: [...newList]
         })
     }
-
-    console.log('LISTVALUES', listValues)
 
     return (
         <Dialog onClose={handleModal} open={openModal.open}>

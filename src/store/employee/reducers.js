@@ -28,8 +28,7 @@ const employeeSlice = createSlice({
             reducer(state, action) {
                 const { id, list, name } = action.payload
 
-
-                state.map((employee, idx) => {
+                state.forEach((employee, idx) => {
                     if (employee.id === id)
                         state[idx] = {
                             ...state[idx],
