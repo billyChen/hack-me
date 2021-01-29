@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-function App() {
+import DrawerList from "./Components/DrawerList/index";
+import Desks from "./Components/Desks";
+import Employees from "./Components/Employees";
+import Calendar from "./Components/Calendar/";
+
+// Material-ui
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  root: {
+    width: "80%",
+    margin: "auto",
+  },
+});
+
+export default function App() {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={classes.root}>
+      <Router>
+        <CssBaseline />
+        <DrawerList />
+        <Switch>
+          <Route path="/desks">
+            <Desks />
+          </Route>
+
+          <Route path="/employees">
+            <Employees />
+          </Route>
+
+          <Route path="/calendar">
+            <Calendar />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
-
-export default App;
